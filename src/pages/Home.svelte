@@ -1,3 +1,3 @@
-<p>
+<h2 class="text-6xl">
     Home
-</p>
+</h2>

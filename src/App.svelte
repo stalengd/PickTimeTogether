@@ -8,29 +8,25 @@
 </script>
 
 <Router>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <i class="svg-logo svg-lg mr-1"></i>
+    <nav class="mb-2">
+        <div class="flex">
+            <a class="mr-auto text-2xl" href="/">
+                <i class=""></i>
                 Pick Time Together
             </a>
-            <ul class="navbar-nav">
+            <ul class="flex items-center">
             {#each routes as {path, label, exact} (label) }
-                <li class="nav-item">
-                    <a href="{path}" class="nav-link" class:active={exact ? pathname == path : pathname.startsWith(path)} use:link>{label}</a>
+                <li class="mx-2">
+                    <a href="{path}" class="" class:active={exact ? pathname == path : pathname.startsWith(path)} use:link>{label}</a>
                 </li>
             {/each}
             </ul>
         </div>
     </nav>
-    <div class="container">
-        <div class="row p-4">
-            <div id="content">
-                {#each routes as {path, component}}
-                    <Route path="{path}" component="{component}" />
-                {/each}
-            </div>
-        </div>
+    <div class="container mx-auto bg-slate-400">
+        {#each routes as {path, component}}
+            <Route path="{path}" component="{component}" />
+        {/each}
     </div>
 </Router>
 

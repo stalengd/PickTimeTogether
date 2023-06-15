@@ -5,6 +5,9 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
+import postcss from 'rollup-plugin-postcss'
+import tailwindcss from "tailwindcss";
+import autoprefixer from "autoprefixer";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -17,6 +20,7 @@ export default {
 		file: 'wwwroot/build/bundle.js'
 	},
 	plugins: [
+
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
@@ -26,7 +30,17 @@ export default {
 				css: true,
 			},
 			emitCss: false,
-			preprocess: sveltePreprocess(),
+			preprocess: sveltePreprocess({
+				postcss: true
+			}),
+		}),
+
+		postcss({
+			extensions: [".postcss"],
+			plugins: [
+				tailwindcss(),
+				autoprefixer,
+			]
 		}),
 
 		// If you have external dependencies installed from
@@ -40,6 +54,7 @@ export default {
 		}),
 		commonjs(),
 		typescript({ sourceMap: !production }),
+
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
